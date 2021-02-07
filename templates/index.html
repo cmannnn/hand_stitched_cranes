@@ -1,14 +1,20 @@
-<h1>hand stitched cranes</h1>
+{% extends 'base.html' %}
 
-<p>homepage</p>
+{% block content %}
 
-<p>My name is {{ first_name }}</p>
+	<h1>hand stitched cranes</h1>
 
-<p>{{ stuff|safe }}</p>
+	<p>homepage</p>
 
-<h3>favorite pizza:</h3>
+	<p>My name is {{ first_name }}</p>
 
-{% for topping in favorite_pizza %}
-	{{ topping }}<br/>
+	<p>{{ stuff|safe }}</p>
 
-{% endfor %}
+	<h3>favorite pizza:</h3>
+
+	{% for topping in favorite_pizza %}
+		{{ topping }}<br/>
+
+	{% endfor %}
+
+{% endblock%}
