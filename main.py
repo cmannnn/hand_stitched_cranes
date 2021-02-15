@@ -7,11 +7,7 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 
 # creating secret key HIDE ON GITHUB
-<<<<<<< HEAD
 app.config['SECRET_KEY'] = "****"
-=======
-app.config['SECRET_KEY'] = ""
->>>>>>> a79dcd87daf4febda636fa701ec3fc778cf16a4a
 
 # create a form class
 class NamerForm(FlaskForm):
@@ -54,11 +50,19 @@ def page_not_found(e):
 	return render_template('500.html'), 500
 
 # create name page
-@app.route('/name', methods-['GET', 'POST'])
+@app.route('/name', methods=['GET', 'POST'])
 def name():
 	name = None
 	form = NamerForm()
-	return render_template('name.html')
+	
+	# validate form
+	if form.validate_on_submit():
+		name = form.name.data
+		form.name.data = ''
+
+	return render_template('name.html',
+		name = name,
+		form = form)
 
 
 
