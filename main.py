@@ -7,7 +7,11 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 
 # creating secret key HIDE ON GITHUB
+<<<<<<< HEAD
 app.config['SECRET_KEY'] = "****"
+=======
+app.config['SECRET_KEY'] = ""
+>>>>>>> a79dcd87daf4febda636fa701ec3fc778cf16a4a
 
 # create a form class
 class NamerForm(FlaskForm):
