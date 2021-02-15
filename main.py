@@ -6,6 +6,15 @@ from wtforms.validators import DataRequired
 # create a flask instance
 app = Flask(__name__)
 
+# creating secret key HIDE ON GITHUB
+app.config['SECRET_KEY'] = "Tightbutthole69!"
+
+# create a form class
+
+
+
+
+
 # create a route decorator
 @app.route('/')
 
@@ -38,3 +47,31 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
 	return render_template('500.html'), 500
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
