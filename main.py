@@ -7,11 +7,12 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 
 # creating secret key HIDE ON GITHUB
-app.config['SECRET_KEY'] = "Tightbutthole69!"
+app.config['SECRET_KEY'] = "****"
 
 # create a form class
-
-
+class NamerForm(FlaskForm):
+	name = StringField("What's your name?", validators = [DataRequired()])
+	submit = SubmitField('Submit')
 
 
 
@@ -48,9 +49,12 @@ def page_not_found(e):
 def page_not_found(e):
 	return render_template('500.html'), 500
 
-
-
-
+# create name page
+@app.route('/name', methods-['GET', 'POST'])
+def name():
+	name = None
+	form = NamerForm()
+	return render_template('name.html')
 
 
 
