@@ -14,8 +14,6 @@ class NamerForm(FlaskForm):
 	name = StringField("What's your name?", validators = [DataRequired()])
 	submit = SubmitField('Submit')
 
-
-
 # create a route decorator
 @app.route('/')
 
