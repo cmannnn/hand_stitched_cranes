@@ -7,7 +7,7 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 
 # creating secret key HIDE ON GITHUB
-app.config['SECRET_KEY'] = "Tightbutthole69!"
+app.config['SECRET_KEY'] = ""
 
 # create a form class
 
