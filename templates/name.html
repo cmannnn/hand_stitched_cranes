@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% for message in get_flashed_messages() %}
+	{{ message }}
+{% endfor %}
+
+
+
 {% if name %}
 	<h1>hello {{ name }}!!</h1>
 {% else %}
