@@ -48,7 +48,7 @@ def page_not_found(e):
 	return render_template('500.html'), 500
 
 # create name page
-@app.route('/name', methods=['GET', 'POST'])
+@app.route('/name', methods = ['GET', 'POST'])
 def name():
 	name = None
 	form = NamerForm()
