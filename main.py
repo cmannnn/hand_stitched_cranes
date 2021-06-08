@@ -41,7 +41,7 @@ class NamerForm(FlaskForm):
 	submit = SubmitField('Submit')
 
 # create a route decorator
-@app.route('/')
+#@app.route('/')
 
 #def index():
 #	return "<h1>hand stitched cranes</h1>"
@@ -49,9 +49,10 @@ class NamerForm(FlaskForm):
 
 @app.route('/user/add', methods = ['GET', 'POST'])
 def add_user():
-	return render_template('add_user.html') 
+	form = UserForm()
+	return render_template('add_user.html', form = form) 
 		
-
+@app.route('/')
 def index():
 	first_name = 'chris'
 	stuff = 'a <strong>chinese</strong> inspired blog'
