@@ -46,6 +46,12 @@ class NamerForm(FlaskForm):
 #def index():
 #	return "<h1>hand stitched cranes</h1>"
 
+
+@app.route('/user/add', methods = ['GET', 'POST'])
+def add_user():
+	return render_template('add_user.html') 
+		
+
 def index():
 	first_name = 'chris'
 	stuff = 'a <strong>chinese</strong> inspired blog'
