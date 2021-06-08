@@ -29,6 +29,13 @@ class Users(db.Model):
 		return '<Name %r>' % self.name
 
 # create a form class
+class UserForm(FlaskForm):
+	name = StringField("name?", validators = [DataRequired()])
+	email = StringField("email?", validators = [DataRequired()])
+	submit = SubmitField("Submit")
+
+
+# create a form class
 class NamerForm(FlaskForm):
 	name = StringField("What's your name?", validators = [DataRequired()])
 	submit = SubmitField('Submit')
