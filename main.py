@@ -24,7 +24,9 @@ class Users(db.Model):
 	email = db.Column(db.String(120), nullable = False, unique = True)
 	date_added = db.Column(db.DateTime, default = datetime.utcnow)
 
-
+	# create a string
+	def __repr__(self):
+		return '<Name %r>' % self.name
 
 # create a form class
 class NamerForm(FlaskForm):
