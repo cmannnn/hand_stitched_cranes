@@ -49,8 +49,23 @@ class NamerForm(FlaskForm):
 
 @app.route('/user/add', methods = ['GET', 'POST'])
 def add_user():
+	name = None
 	form = UserForm()
-	return render_template('add_user.html', form = form) 
+	if form.validate_on_submit():
+		user = Users.query.filter_by(email = form.email.data).first()
+		if user is None:
+			user = Users(name = form.name.data, email = form.email.data)
+			db.session.add(user)
+			db.session.commit()
+		name = form.name.data
+		form.name.data = ''
+		form.email.data = ''
+		flash("User added")
+	our_users = Users.query.order_by(Users.date_added)
+	return render_template('add_user.html', 
+		form = form, 
+		name = name,
+		our_users = our_users) 
 		
 @app.route('/')
 def index():
@@ -58,15 +73,15 @@ def index():
 	stuff = 'a <strong>chinese</strong> inspired blog'
 	favorite_pizza = ['peppers', 'pineapple', 'mushroom', 'pesto']
 	return render_template('index.html', 
-		first_name=first_name,
-		stuff=stuff,
-		favorite_pizza=favorite_pizza)
+		first_name = first_name,
+		stuff = stuff,
+		favorite_pizza = favorite_pizza)
 
 # localhost:50000/user/chris
 @app.route('/user/<name>')
 
 def user(name):
-	return render_template('user.html', user_name=name)
+	return render_template('user.html', user_name = name)
 
 # create custom error pages
 
