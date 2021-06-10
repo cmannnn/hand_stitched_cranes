@@ -21,10 +21,8 @@ app.config['SECRET_KEY'] = "****"
 # initialize database
 db = SQLAlchemy(app)
 
-# update database record
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
-def update(id):
-	form = UserForm():
+
+
 
 
 # create model
@@ -43,6 +41,13 @@ class UserForm(FlaskForm):
 	name = StringField("name?", validators = [DataRequired()])
 	email = StringField("email?", validators = [DataRequired()])
 	submit = SubmitField("Submit")
+
+# update database record
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+	form = UserForm():
+	name_to_update = Users.query.get_or_404(id)
+	
 
 
 # create a form class
