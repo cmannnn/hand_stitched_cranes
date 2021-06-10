@@ -9,13 +9,23 @@ from datetime import datetime
 app = Flask(__name__)
 
 # add database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# SQLite db
 
-# creating secret key HIDE ON GITHUB
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# mySQL db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:***@localhost/our_users'
+
+# creating secret key HIDE
 app.config['SECRET_KEY'] = "****"
 
 # initialize database
 db = SQLAlchemy(app)
+
+# update database record
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+	form = UserForm():
+
 
 # create model
 class Users(db.Model):
