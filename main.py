@@ -95,6 +95,8 @@ def add_user():
 		name = form.name.data
 		form.name.data = ''
 		form.email.data = ''
+		form.favorite_color.data = ''
+		
 		flash("User added")
 	our_users = Users.query.order_by(Users.date_added)
 	return render_template('add_user.html', 
