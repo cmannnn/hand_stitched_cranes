@@ -2,8 +2,11 @@ from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+
 
 # create a flask instance
 app = Flask(__name__)
@@ -20,7 +23,7 @@ app.config['SECRET_KEY'] = "****"
 
 # initialize database
 db = SQLAlchemy(app)
-
+migrate = Migrate(app, db)
 
 
 
@@ -41,7 +44,7 @@ class Users(db.Model):
 class UserForm(FlaskForm):
 	name = StringField("name?", validators = [DataRequired()])
 	email = StringField("email?", validators = [DataRequired()])
-	favorite_color = StringField("favorite color")
+	favorite_color = StringField("favorite color?")
 	submit = SubmitField("Submit")
 
 # update database record
@@ -96,7 +99,7 @@ def add_user():
 		form.name.data = ''
 		form.email.data = ''
 		form.favorite_color.data = ''
-		
+
 		flash("User added")
 	our_users = Users.query.order_by(Users.date_added)
 	return render_template('add_user.html', 
