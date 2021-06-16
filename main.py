@@ -25,9 +25,6 @@ app.config['SECRET_KEY'] = "****"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
-
-
 # create model
 class Users(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
@@ -39,6 +36,30 @@ class Users(db.Model):
 	# create a string
 	def __repr__(self):
 		return '<Name %r>' % self.name
+
+@app.route('/delete/<int:id>')
+def delete(id):
+	user_to_delete = Users.query.get_or_404(id)
+	name = None
+	form = UserForm()
+	
+	try:
+		db.session.delete(user_to_delete)
+		db.session.commit()
+		flash("user deleted")
+
+		our_users = Users.query.order_by(Users.date_added)
+		return render_template("add_user.html", 
+		form = form, 
+		name = name,
+		our_users = our_users) 
+
+	except:
+		flash("there was a problem deleting user")
+		return render_template("add_user.html", 
+		form = form, 
+		name = name,
+		our_users = our_users) 
 
 # create a form class
 class UserForm(FlaskForm):
@@ -70,13 +91,14 @@ def update(id):
 	else:
 		return render_template("update.html",
 				form = form,
-				name_to_update = name_to_update)
+				name_to_update = name_to_update,
+				id = id)
 
 
 # create a form class
 class NamerForm(FlaskForm):
-	name = StringField("What's your name?", validators = [DataRequired()])
-	submit = SubmitField('Submit')
+	name = StringField("what's your name?", validators = [DataRequired()])
+	submit = SubmitField('submit')
 
 # create a route decorator
 #@app.route('/')
@@ -100,7 +122,7 @@ def add_user():
 		form.email.data = ''
 		form.favorite_color.data = ''
 
-		flash("User added")
+		flash("user added")
 	our_users = Users.query.order_by(Users.date_added)
 	return render_template('add_user.html', 
 		form = form, 
