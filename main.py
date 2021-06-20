@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # mySQL db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Beanboy65?@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:xxx@localhost/our_users'
 
 # creating secret key HIDE
 app.config['SECRET_KEY'] = "****"
@@ -223,7 +223,7 @@ def name():
 		form.name.data = ''
 		flash("form submitted successfully!")
 
-	return render_template('test_pw.html',
+	return render_template('name.html',
 		name = name,
 		form = form)
 
