@@ -16,12 +16,12 @@
 	<h1>Email: {{ email }}</h1>
 	<h1>Password: {{ password }}</h1>
 	<br/> 
-	<h2> i found this info:</h2>
+	<h2>i found this info:</h2>
 	name: {{ pw_to check.name }}
 	email: {{ pw_to_check.email }}
 	pw: {{ pw_to_check.password_hash }}
 
-	
+
 
 {% else %}
 	<h1>what's your email and password?</h1>
@@ -29,25 +29,21 @@
 	<form method = "POST">
 		{{ form.hidden_tag() }}
 
-		{{ form.email.label(
-		class = "form-label") }}
+		{{ form.email.label(class = "form-label") }}
 		
-		{{ form.email(
-		class = "form-control") }}
+		{{ form.email(class = "form-control") }}
 		<br/>
 
-		{{ form.password_hash.label(
-		class = "form-label") }}
+		{{ form.password_hash.label(class = "form-label") }}
 		
-		{{ form.password_hash(
-		class = "form-control") }}
+		{{ form.password_hash(class = "form-control") }}
 		<br/>
 
-		{{ form.submit(
-			class = "btn btn-dark") }}
+		{{ form.submit(class = "btn btn-dark") }}
 
 	</form>
 
 
 {% endif %}
-{% endblock%}
+
+{% endblock %}

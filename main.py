@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # mySQL db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:xxx@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Beanboy65?@localhost/our_users'
 
 # creating secret key HIDE
 app.config['SECRET_KEY'] = "****"
@@ -195,9 +195,9 @@ def test_pw():
 
 	# validate form
 	if form.validate_on_submit():
-		name = form.name.data
+		email = form.email.data
 		password = form.password_hash.data
-		
+		# clear the form
 		form.name.data = ''
 		form.password_hash.data = ''
 
