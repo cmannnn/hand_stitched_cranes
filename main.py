@@ -114,7 +114,7 @@ def update(id):
 # create a form class
 class PasswordForm(FlaskForm):
 	email = StringField("what's your email?", validators = [DataRequired()])
-	epassword_hash = PasswordField("what's your password?", validators = [DataRequired()])
+	password_hash = PasswordField("what's your password?", validators = [DataRequired()])
 	submit = SubmitField('submit')
 
 
@@ -196,11 +196,18 @@ def test_pw():
 	# validate form
 	if form.validate_on_submit():
 		name = form.name.data
+		password = form.password_hash.data
+		
 		form.name.data = ''
-		flash("form submitted successfully!")
+		form.password_hash.data = ''
 
-	return render_template('name.html',
-		name = name,
+		pw_to_check = Users.query.filter_by(email=email).first()
+		#flash("form submitted successfully!")
+
+	return render_template('test_pw.html',
+		email = email,
+		password = password,
+		pw_to_check = pw_to_check,
 		form = form)
 
 
@@ -212,17 +219,12 @@ def name():
 	
 	# validate form
 	if form.validate_on_submit():
-		email = form.email.data
-		password = form.pasword_hash.data
-		# clear the form
-		form.email.data = ''
-		form.password_hash.data = ''
-		
-		#flash("form submitted successfully!")
+		name = form.name.data
+		form.name.data = ''
+		flash("form submitted successfully!")
 
 	return render_template('test_pw.html',
-		email = email,
-		password = password,
+		name = name,
 		form = form)
 
 

@@ -15,8 +15,12 @@
 {% if email %}
 	<h1>Email: {{ email }}</h1>
 	<h1>Password: {{ password }}</h1>
-	
 	<br/> 
+	<h2> i found this info:</h2>
+	name: {{ pw_to check.name }}
+	email: {{ pw_to_check.email }}
+	pw: {{ pw_to_check.password_hash }}
+
 	
 
 {% else %}
