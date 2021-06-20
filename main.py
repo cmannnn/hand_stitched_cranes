@@ -111,11 +111,18 @@ def update(id):
 				name_to_update = name_to_update,
 				id = id)
 
+# create a form class
+class PasswordForm(FlaskForm):
+	email = StringField("what's your email?", validators = [DataRequired()])
+	epassword_hash = PasswordField("what's your password?", validators = [DataRequired()])
+	submit = SubmitField('submit')
+
 
 # create a form class
 class NamerForm(FlaskForm):
 	name = StringField("what's your name?", validators = [DataRequired()])
 	submit = SubmitField('submit')
+
 
 # create a route decorator
 #@app.route('/')
@@ -177,12 +184,15 @@ def page_not_found(e):
 def page_not_found(e):
 	return render_template('500.html'), 500
 
-# create name page
-@app.route('/name', methods = ['GET', 'POST'])
-def name():
-	name = None
-	form = NamerForm()
-	
+# create password test page
+@app.route('/test_pw', methods = ['GET', 'POST'])
+def test_pw():
+	email = None
+	password = None
+	pw_to_check = None
+	passed = None
+	form = PasswordForm()
+
 	# validate form
 	if form.validate_on_submit():
 		name = form.name.data
@@ -193,6 +203,27 @@ def name():
 		name = name,
 		form = form)
 
+
+# create name page
+@app.route('/name', methods = ['GET', 'POST'])
+def name():
+	name = None
+	form = NamerForm()
+	
+	# validate form
+	if form.validate_on_submit():
+		email = form.email.data
+		password = form.pasword_hash.data
+		# clear the form
+		form.email.data = ''
+		form.password_hash.data = ''
+		
+		#flash("form submitted successfully!")
+
+	return render_template('test_pw.html',
+		email = email,
+		password = password,
+		form = form)
 
 
 
