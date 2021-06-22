@@ -29,7 +29,12 @@ migrate = Migrate(app, db)
 # create json webpage
 @app.route('/date')
 def get_current_date():
-	return {"date": date.today()}
+	favorite_pizza = {
+		"chris": "pineapple",
+		"shannon": "cheese",
+		"bill": "sausage"}
+	return favorite_pizza
+	#return {"date": date.today()}
 
 
 # create model
