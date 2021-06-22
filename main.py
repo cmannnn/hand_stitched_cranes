@@ -6,7 +6,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import date
 
 # create a flask instance
 app = Flask(__name__)
@@ -24,6 +24,13 @@ app.config['SECRET_KEY'] = "****"
 # initialize database
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+
+# create json webpage
+@app.route('/date')
+def get_current_date():
+	return {"date": date.today()}
+
 
 # create model
 class Users(db.Model):
