@@ -44,6 +44,30 @@ class PostForm(FlaskForm):
 	slug = StringField("slugfield", validators = [DataRequired()])
 	submit = SubmitField("submit", validators = [DataRequired()])
 
+# add post page
+@app.route('/add-post', methods=['GET', 'POST'])
+def add_post():
+	form = PostForm()
+
+	if form.validate_on_submit():
+		post = Posts(title = form.title.data, content = form.content.data, author = form.author.data, slug = form.slug.data)
+		# clear the form
+		form.title.data = ''
+		form.content.data = ''
+		form.author.data = ''
+		form.slug.data = ''
+
+		# add post data to database
+		db.session.add(post)
+		db.session.commit()
+
+		# return a message
+		flash('post submitted successfully')
+
+
+		# redirect a webpage
+	return render_template("add_post.html", form = form)
+
 # create json webpage
 @app.route('/date')
 def get_current_date():
