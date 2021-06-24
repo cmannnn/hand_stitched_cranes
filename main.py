@@ -46,8 +46,9 @@ class PostForm(FlaskForm):
 
 @app.route('/posts')
 def posts():
-
-	return render_template("post.html")
+	# grab all the database posts
+	posts = Posts.query.order_by(Posts.date_posted)
+	return render_template("posts.html", posts=posts)
 
 
 # add post page
