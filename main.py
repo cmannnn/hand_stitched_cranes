@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 # mySQL db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:xxx@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Beanboy65?@localhost/our_users'
 
 # creating secret key HIDE
 app.config['SECRET_KEY'] = "****"
@@ -54,6 +54,13 @@ def posts():
 def post(id):
 	post = Posts.query.get_or_404(id)
 	return render_template('post.html', post=post)
+
+@app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+def edit_post(id):
+	post = Posts.query.get_or_404(id)
+	form = PostForm()
+
+
 
 
 # add post page
