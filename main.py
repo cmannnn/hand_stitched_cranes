@@ -65,6 +65,8 @@ def edit_post(id):
 		post.slug = form.slug.data
 		post.content = form.content.data
 		# update database
+		db.session.add(post)
+		db.session.commit()
 
 
 # add post page
