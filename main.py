@@ -59,8 +59,12 @@ def post(id):
 def edit_post(id):
 	post = Posts.query.get_or_404(id)
 	form = PostForm()
-
-
+	if form.validate_on_submit():
+		post.title = form.title.data
+		post.author = form.author.data
+		post.slug = form.slug.data
+		post.content = form.content.data
+		# update database
 
 
 # add post page
