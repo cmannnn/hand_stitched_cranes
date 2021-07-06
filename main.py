@@ -44,16 +44,19 @@ class PostForm(FlaskForm):
 	slug = StringField("slugfield", validators = [DataRequired()])
 	submit = SubmitField("submit", validators = [DataRequired()])
 
+
 @app.route('/posts')
 def posts():
 	# grab all the database posts
 	posts = Posts.query.order_by(Posts.date_posted)
 	return render_template("posts.html", posts=posts)
 
+
 @app.route('/posts/<int:id>')
 def post(id):
 	post = Posts.query.get_or_404(id)
 	return render_template('post.html', post=post)
+
 
 @app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
 def edit_post(id):
@@ -69,6 +72,11 @@ def edit_post(id):
 		db.session.commit()
 		flash("post updated")
 		return redirect(url_for('post', id=post.id))
+	form.title.data = post.title
+	form.author.data = post.author
+	form.slug.data = post.slug
+	form.content.data = post.content
+	return render_template('edit_post.html', form=form)
 
 
 # add post page
