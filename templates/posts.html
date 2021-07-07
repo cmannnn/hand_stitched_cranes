@@ -25,6 +25,8 @@
 	{{ post.content }}
 	<br/><br/>
 	<a href="{{ url_for('post', id=post.id) }}" class="btn btn-outline-secondary btn-sm">view post</a>
+
+	<a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-outline-secondary btn-sm">edit post</a>
 </div>
 <br/>
 
